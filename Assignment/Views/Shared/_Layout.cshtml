@@ -1,0 +1,175 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Assignment</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/Assignment.styles.css" asp-append-version="true" />
+    <style>
+        nav {
+            background-color: white;
+            overflow: hidden;
+            border-bottom: solid 1px;
+        }
+
+            nav ul {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                float: left;
+            }
+
+            nav li {
+                float: left;
+            }
+
+            nav a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            nav p {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+                margin-bottom: 0;
+            }
+
+            nav a:hover {
+                background-color: #ddd;
+                color: black;
+            }
+
+            nav ul:last-child {
+                float: right;
+            }
+
+            nav form {
+                margin-top: 15px;
+                margin-left: 100px;
+                margin-bottom: 0;
+                position: relative;
+            }
+
+            nav input[type="text"] {
+                border: 1px solid black;
+                padding: 6px 30px 6px 10px;
+                width: 500px;
+                font-size: 16px;
+                margin-top: -8px;
+                margin-left: 52px;
+            }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        nav button[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            font-size: 16px;
+            position: absolute;
+            top: -6px;
+            right: 0;
+            cursor: pointer;
+            margin-left: 12px;
+        }
+
+            nav button[type="submit"]:hover {
+                background-color: #3e8e41;
+            }
+    </style>
+</head>
+<body>
+   
+    <header>
+        <nav>
+                
+            <ul >
+                <li><a href="/Home"><b>Phim hay</b></a></li>
+                <li><a href="/Home">Trang chủ</a></li>
+                <li class="flex-end">
+                    <form asp-controller="Home" asp-action="Search" method="get">
+                        <input type="text" name="key" placeholder="Tên phim ..." />
+                        <input type="submit" value="Search" />
+                    </form>
+                </li>
+            </ul>
+            @if (Context.Session.GetString("account") != null)
+            {
+                var person = (Person)JsonSerializer.Deserialize<Person>(Context.Session.GetString("account"));
+                <div >
+                    <ul >
+                        <li >
+                            <p>Chào mừng: @person.Fullname</p>
+                        </li>
+                        <li >
+                            <a  asp-controller="Login" asp-action="SignOut">SignOut</a>
+                        </li>
+                    </ul>
+                </div>
+
+            }
+            else if (Context.Session.GetString("account2") != null)
+            {
+                var person = (Person)JsonSerializer.Deserialize<Person>(Context.Session.GetString("account2"));
+                <div>
+                    <ul>
+                        <li >
+                            <p>Chào mừng: @person.Fullname</p>
+                        </li>
+                        <li >
+                            <a  asp-controller="Login" asp-action="SignOut">SignOut</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            else
+            {
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+                    <ul >
+                        <li >
+                            <a href="~/Login">Đăng Nhập</a>
+                        </li>
+                        <li >
+                            <a  href="~/Signup">Đăng ký</a>
+                        </li>
+                    </ul>
+                </div>
+
+            }
+           
+        </nav>
+    </header>
+    <div >
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2023 - Assignment - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Assignment.Models.Movie>
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+
+<h1>List of Products</h1>
+
+<a asp-action="Create">Create</a>
+
+<form method="post" asp-action="Search">
+    <input type="text" name="search" placeholder="Search by name" />
+    <button type="submit">Search</button>
+</form>
+
+<table border="1">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th> Image </th>
+            <th>Description</th>
+            <th>Genre</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var p in Model)
+        {
+                <tr>
+                    <td>@p.MovieId</td>
+                    <td>@p.Title</td>
+                    <td>@p.Year</td>
+                    <td>@p.Image</td>
+                    <td>@p.Description</td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@p.MovieId">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@p.MovieId">Delete</a>
+                    </td>
+                </tr>
+        }
+    </tbody>
+</table>

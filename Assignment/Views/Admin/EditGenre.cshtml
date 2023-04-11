@@ -1,0 +1,103 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+
+@model Assignment.Models.Genre
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Manage Genre</title>
+
+
+
+</head>
+<body class="sb-nav-fixed">
+    <!-- Admin navbar -->
+
+    <div id="layoutSidenav">
+        <!-- Admin Slidenav -->
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+
+                    <div class="modal-content">
+                        <div class="modal-header" style="width: 100%">
+                            <h5 class="modal-title" id="exampleModalLabel">Edit Genre Information</h5>
+                            <a asp-action="ListGenres" class="btn-close"></a>
+                        </div>
+
+                        <form asp-action="EditGenre" method="post" enctype="multipart/form-data">
+                            <div class="modal-body">
+
+                                <input type="text" asp-for="GenreId" id="GenreId" class="form-control form-control-lg"
+                                       name="GenreId" hidden="" />
+
+                                <div class="form-outline mb-3">
+                                    <label class="form-label" for="img3Example">Description <span style="color: red; font-weight: bold">*</span></label>
+                                    <input type="text" asp-for="Description" class="form-control form-control-lg"
+                                           required name="Description" />
+                                </div>
+
+                                
+
+
+
+
+
+
+                            </div>
+                            <div class="modal-footer">
+                                <a asp-action="ListGenres" class="btn btn-secondary">Close</a>
+                                <button id="update-profile-btn" type="submit" class="btn btn-danger" value="update">Update</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+
+    <script>
+        var input = document.getElementById('myFile');
+        var fileName = document.getElementById('Image');
+        input.addEventListener('change', function () {
+            fileName.value = "files\\" + input.files[0].name;
+        });
+    </script>
+
+    <script>
+        const fileInput = document.getElementById('myFile');
+        const preview = document.getElementById('preview');
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+
+
+
+</body>
+
+</html>

@@ -1,0 +1,102 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, AuthoringTagHelpers
+
+
+@model Assignment.Models.Genre
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+    <title>Manage Genre</title>
+
+
+
+</head>
+<body class="sb-nav-fixed">
+    <!-- Admin navbar -->
+
+    <div id="layoutSidenav">
+        <!-- Admin Slidenav -->
+
+        <div id="layoutSidenav_content">
+            <main>
+                <div class="container-fluid px-4">
+
+                    <!-- Button trigger modal -->
+                    <!-- Modal -->
+
+                    <div class="modal-content">
+                        <div class="modal-header" style="width: 100%">
+                            <h5 class="modal-title" id="exampleModalLabel">Add Genre Information</h5>
+                            <a href="ListMovies" class="btn-close"></a>
+                        </div>
+
+                        <form action="CreateGenres" method="POST">
+                            <div class="modal-body">
+
+
+                                <div class="form-outline mb-3">
+                                    <label class="form-label" for="img3Example">Description <span style="color: red; font-weight: bold">*</span></label>
+                                    <input type="text" asp-for="Description" class="form-control form-control-lg"
+                                           required name="Description" />
+                                </div>
+                                @*
+                                <div class="form-outline mb-3">
+                                <label class="form-label" for="status3Example">Status <span style="color: red; font-weight: bold">*</span></label>
+                                <select name="status" class="form-select form-select-lg" id="status3Example">
+                                <option value="1">Active</option>
+                                <option value="0">Block</option>
+
+                                </select>
+                                </div>*@
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                <button id="update-profile-btn" type="submit" class="btn btn-danger" name="action" value="createCategory">Create</button>
+                            </div>
+                        </form>
+
+
+                    </div>
+
+
+                </div>
+
+            </main>
+
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.21/lodash.min.js"></script>
+
+
+    <script>
+        var input = document.getElementById('myFile');
+        var fileName = document.getElementById('Image');
+        input.addEventListener('change', function () {
+            fileName.value = "Image\\" + input.files[0].name;
+        });
+    </script>
+
+    <script>
+        const fileInput = document.getElementById('myFile');
+        const preview = document.getElementById('preview');
+        fileInput.addEventListener('change', function () {
+            const file = fileInput.files[0];
+            const reader = new FileReader();
+            reader.addEventListener('load', function () {
+                preview.src = reader.result;
+            }, false);
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>   
+
+
+
+
+</body>
+
+</html>

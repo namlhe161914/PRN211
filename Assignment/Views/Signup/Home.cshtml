@@ -1,0 +1,33 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@model Assignment.Models.Person
+
+
+<div class="d-flex justify-content-center mt-5">
+    <div class="bg-info bg-opacity-25 w-50 p-4 rounded-3 pb-5">
+        <h4 class="text-center mb-3">Đăng kí tài khoản</h4>
+        <form method="post" asp-action="Home">
+            <input class="form-control" type="email" placeholder="Email" asp-for="Email" />
+            <p class ="text-danger">@ViewData["Error1"]</p>
+            <p class="text-danger">@ViewData["Error"]</p>
+            <input class="form-control mt-4" type="password" placeholder="Password *" asp-for="Password" />
+            <p class="text-danger">@ViewData["Error2"]</p>
+            <input class="form-control mt-4" type="text" placeholder="Fullname" asp-for="Fullname" />
+            <p class="text-danger">@ViewData["Error4"]</p>
+            <span>Giới tính</span> <input type="radio" asp-for="Gender" value="Nam" />Nam
+
+            <input type="radio" asp-for="Gender" value="Nữ" />Nữ
+            <p class="text-danger">@ViewData["Error3"]</p>
+            <p class="text-secondary">
+                Nếu tài khoản đã tồn tại.
+                <a class="text-decoration-none" href="Login">
+                    Đăng Nhập
+                </a>
+            </p>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Đăng ký" />
+
+            </div>
+        </form>
+        <hr />
+    </div>
+</div>

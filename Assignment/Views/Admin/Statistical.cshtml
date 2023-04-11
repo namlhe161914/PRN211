@@ -1,0 +1,56 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+	<title>Thống kê</title>
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+	<div class="container-fluid">
+		<div class="row">
+			<div id="layoutSidenav_nav" class="col-md-3">
+				<nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
+					<div class="sb-sidenav-menu">
+						<div class="nav" style="display:block">
+							<div class="sb-sidenav-menu-heading">Manage</div>
+
+							<a class="nav-link" asp-action="ListMovies">
+								<i class="bi bi-tree sb-nav-link-icon"></i>
+								Movie
+							</a>
+							<a class="nav-link" asp-action="ListGenres">
+								<i class="bi bi-tags sb-nav-link-icon"></i>
+								Genre
+							</a>
+							<a class="nav-link" asp-action="ListPerson">
+								<i class="bi bi-tags sb-nav-link-icon"></i>
+								Person
+							</a>
+							<a class="nav-link" asp-action="Statistical">
+								<i class="bi bi-tags sb-nav-link-icon"></i>
+								Statistical
+							</a>
+						</div>
+					</div>
+				</nav>
+			</div>
+			<div class="col-md-9">
+				<h1>Thống kê</h1>
+				<div class="row">
+					@for (var i = 0; i < ViewBag.avg.Count; i++)
+					{
+                        <div class="col-md-4">
+				<h2>Tên phim: @ViewBag.name[i]</h2>
+				<p>Điểm trung bình: @ViewBag.avg[i]</p>
+				<p>Số lượng đánh giá: @ViewBag.ratecount[i]</p>
+				<p>Số lượng comments: @ViewBag.cmtCount[i]</p>
+			</div>
+		}
+	</div>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.1/js/bootstrap.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</body>
+</html>

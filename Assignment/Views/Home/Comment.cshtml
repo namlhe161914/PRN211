@@ -1,0 +1,143 @@
+﻿@model Assignment.Models.Rate;
+
+<head>
+    <style>
+
+        main {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 6px 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        .movie-image {
+            width: 30%;
+            margin-left: 20px;
+        }
+
+            .movie-image img {
+                width: 50%;
+                height: 200px;
+                margin-top: 10px;
+                margin-left: 64px;
+            }
+
+            .movie-image button {
+                background-color: rgb(39, 100, 255);
+                color: white;
+                border: none;
+                border-radius: 5px;
+                padding: 6px 10px;
+                font-size: 16px;
+            }
+
+                .movie-image button:active {
+                    background-color: rgb(2, 2, 195);
+                }
+
+        .movie-details {
+            width: 100%;
+            margin-right: 10px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+        }
+
+            .movie-details hr {
+                border-style: solid;
+                border-width: 1px 0 0;
+                border-color: #ccc;
+            }
+
+        .name-detail {
+            margin-bottom: 20px;
+        }
+
+        .comment {
+        }
+
+        .name-detail textarea {
+            width: 100%;
+            height: 100px;
+        }
+
+        .name-detail h1 {
+            font-size: 50px;
+        }
+
+        .separator {
+            margin: 5px 0;
+            border: 1px solid #ccc;
+        }
+
+        .name-detail button {
+            background-color: rgb(39, 100, 255);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 6px 10px;
+            font-size: 16px;
+            border-top: 1px solid #ccc;
+        }
+
+            .name-detail button:hover {
+                background-color: rgb(2, 2, 195);
+            }
+
+    </style>
+</head>
+
+<body>
+    <main>
+        @foreach (Movie c in ViewBag.movies)
+        {
+            var person = (Person)JsonSerializer.Deserialize<Person>(Context.Session.GetString("account"));
+            <div class="movie-image">
+                <img src="~/Image/@c.Image" alt={selectedMovie.name} />
+            </div>
+
+            <div class="movie-details">
+
+                <div class='name-detail'>
+                    <h1>@c.Title</h1>
+                    <p><b>Thể loại: </b>@c.Genre.Description</p>
+                    <p><b>Điểm đánh giá: </b>@ViewBag.avg</p>
+                    <p><b>Mô tả: </b>@c.Description</p>
+
+                </div>
+                <div class="separator"></div>
+                <form method="post" asp-action="Comment">
+                    <input style="display:none" type="number" asp-for="MovieId" value="@c.MovieId" /><br />
+                    <input style="display:none" type="number" asp-for="PersonId" value="@person.PersonId" /><br />
+                    <h2 style="margin-top: -54px;">Chi tiết đánh giá:</h2><br />
+                    <label>Điểm đánh giá</label>
+                    <input type="number" max="10" min="0" asp-for="NumericRating" /><br />
+                    <span asp-validation-for="NumericRating"></span><br />
+                    <label>Bình luận</label><br />
+                    <textarea style="width:100%; height: 80px;" asp-for="Comment"></textarea><br />
+                    <span asp-validation-for="Comment"></span><br />
+                    <input type="submit" value="Đánh giá" /><br />
+                </form>
+                <div class="separator"></div>
+                <div class='comment'>
+                    <h1>Bình luận</h1>
+                    @foreach (Rate r in ViewBag.rates)
+                    {
+                        <p><b>@r.Person.Fullname:</b>@r.Comment</p>
+                    }
+                </div>
+
+            </div>
+        }
+    </main>
+
+</body>
